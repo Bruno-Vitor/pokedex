@@ -13,98 +13,32 @@
     <title>Pokedex - Starter Pack</title>
 </head>
 
-<body>
-    <header>
-        <div class="logo">
-            <a href="index.html">
-                <img src="assets/img/pokemon-logo.png" alt="">
-            </a>
-        </div>
-    </header>
+<header>
+    <div class="logo">
+        <a href="index.html">
+            <img src="assets/img/pokemon-logo.png" alt="">
+        </a>
+    </div>
+</header>
 
+<form action="">
     <div class="wrapper">
         <div class="search_box">
-            <input type="text" placeholder="What pokémon are you looking for?">
+            <input type="text" placeholder="What pokémon are you looking for?" id="user">
             <i class="fas fa-search"></i>
         </div>
     </div>
+</form>
 
+<body>
     <div class="container">
-        <main class="grid">
-            <article>
-                <img src="assets/img/1.svg" alt="Bulbasaur">
-                <div class="text">
-                    <h3>001</h3>
-                    <p>Bulbasaur</p>
-                </div>
-            </article>
-            <article>
-                <img src="assets/img/1.svg" alt="Bulbasaur">
-                <div class="text">
-                    <h3>002</h3>
-                    <p>Bulbasaur</p>
-                </div>
-            </article>
-            <article>
-                <img src="assets/img/1.svg" alt="Bulbasaur">
-                <div class="text">
-                    <h3>003</h3>
-                    <p>Bulbasaur</p>
-                </div>
-            </article>
-            <article>
-                <img src="assets/img/1.svg" alt="Bulbasaur">
-                <div class="text">
-                    <h3>004</h3>
-                    <p>Bulbasaur</p>
-                </div>
-            </article>
-            <article>
-                <img src="assets/img/1.svg" alt="Bulbasaur">
-                <div class="text">
-                    <h3>005</h3>
-                    <p>Bulbasaur</p>
-                </div>
-            </article>
-            <article>
-                <img src="assets/img/1.svg" alt="Bulbasaur">
-                <div class="text">
-                    <h3>006</h3>
-                    <p>Bulbasaur</p>
-                </div>
-            </article>
-            <article>
-                <img src="assets/img/1.svg" alt="Bulbasaur">
-                <div class="text">
-                    <h3>007</h3>
-                    <p>Bulbasaur</p>
-                </div>
-            </article>
-            <article>
-                <img src="assets/img/1.svg" alt="Bulbasaur">
-                <div class="text">
-                    <h3>008</h3>
-                    <p>Bulbasaur</p>
-                </div>
-            </article>
-            <article>
-                <img src="assets/img/1.svg" alt="Bulbasaur">
-                <div class="text">
-                    <h3>009</h3>
-                    <p>Bulbasaur</p>
-                </div>
-            </article>
-            <article>
-                <img src="assets/img/1.svg" alt="Bulbasaur">
-                <div class="text">
-                    <h3>010</h3>
-                    <p>Bulbasaur</p>
-                </div>
-            </article>
-        </main>
+        <h1 class="title-page">Pokedex - Starter Pack</h1>
+        <ul data-js="pokedex" class="pokedex"></ul>
     </div>
 
-    <script src="assets/js/scripts.js"></script>
+    <script src="assets/js/requests.js"></script>
+    <script src="assets/js/search.js"></script>
+    <script src="assets/js/scroll.js"></script>
 </body>
 
 </html>
