@@ -25,7 +25,8 @@
     <form action="">
         <div class="wrapper">
             <div class="search_box">
-                <input type="text" placeholder="What pokémon are you looking for?" id="user">
+                <!-- <input type="text" name="searchBar" placeholder="What pokémon are you looking for?">  -->
+                <input type="text" placeholder="What pokémon are you looking for?" id="searchBar" class="filter">
                 <i class="fas fa-search"></i>
             </div>
         </div>
@@ -33,7 +34,13 @@
 
     <div class="container">
         <h1 class="title-page">Pokedex - Starter Pack</h1>
-        <ul data-js="pokedex" class="pokedex"></ul>
+        <ul data-js="pokedex" class="pokedex" id="pokemonsList"></ul>
+    </div>
+
+    <div class="loader">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
     </div>
 
     <script src="assets/js/requests.js"></script>
