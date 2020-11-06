@@ -1,16 +1,9 @@
-
-/* código de infinite scroll + filtro de pesquisa no input,
-   ainda falta corrigir alguns bugs para ficar 100% funcional.
-*/
-
 const pokemonsList = document.querySelector('#pokemonsList');
 const loaderContainer = document.querySelector('.loader');
 const searchBarInput = document.querySelector('#searchBar');
 
-let id = 0;
-
 const getPokemons = async () => {
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/?_limit=20${id}`)
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/?_limit=20`)
     return response.json()
 }
 
@@ -33,7 +26,6 @@ const addPokemonsIntoDOM = async () => {
 
 const getNextPokemons = () => {
     setTimeout(() => {
-        id++
         addPokemonsIntoDOM()
     }, 300)
 }
@@ -65,7 +57,7 @@ const handleScrollToPageBottom = () => {
 
 const showPokemonIfMatchInputValue = inputValue => card => {
     const pokemonNumber = card.querySelector('.number').textContent.toLowerCase()
-    const pokemonName = card.querySelector('.title-card').textContent.toLowerCase()
+    const pokemonName = card.querySelector('.card-title').textContent.toLowerCase()
     const pokemonContainsInputValue = pokemonNumber.includes(inputValue) || pokemonName.includes(inputValue)
 
     if (pokemonContainsInputValue) {
@@ -78,10 +70,11 @@ const showPokemonIfMatchInputValue = inputValue => card => {
 
 const handleInputValue = event => {
     const inputValue = event.target.value.toLowerCase();
-    const pokemons = document.querySelector('.card');
+    const pokemons = document.querySelectorAll('.card');
 
     pokemons.forEach(showPokemonIfMatchInputValue(inputValue))
 }
+//console.log(showPokemonIfMatchInputValue)
 
 addPokemonsIntoDOM()
 

@@ -89,7 +89,7 @@ body {
 
 .pokedex {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
 
@@ -105,7 +105,7 @@ body {
 }
 
 .pokedex img {
-    width: 50%;
+    width: 40%;
     padding: 15px;
 }
 
@@ -113,77 +113,80 @@ body {
 .card-subtitle {
     padding: 10px 0;
     font-size: 20px;
-    color: #222;
+    color: #FFFFFF;
     font-weight: bold;
 }
 
 .dark {
-    background-color: #b68d71;
+    background-color: #705848;
 }
 
 .ghost {
-    background-color: #ba9ddb;
+    background-color: #705898;
 }
 
 .steel {
-    background-color: #f4f4f4;
+    background-color: #B8B8D0;
 }
 
 .fire {
-    background-color: #FDDFDF;
+    background-color: #F08030;
 }
 
 .grass {
-    background-color: #DEFDE0;
+    background-color: #78C850;
 }
 
 .electric {
-    background-color: #FCF7DE;
+    background-color: #F8D030;
 }
 
-.water,
+.water {
+    background-color: #6890F0;
+}
+
 .ice {
-    background-color: #DEF3FD;
+    background-color: #98D8D8;
 }
 
 .ground {
-    background-color: #f4e7da;
+    background-color: #E0C068;
 }
 
 .rock {
-    background-color: #d5d5d4;
+    background-color: #B8A038;
 }
 
 .fairy {
-    background-color: #fceaff;
+    background-color: #EE99AC;
 }
 
 .poison {
-    background-color: #98d7a5;
+    background-color: #A040A0;
 }
 
 .bug {
-    background-color: #f8d5a3;
+    background-color: #A8B820;
 }
 
 .dragon {
-    background-color: #97b3e6;
+    background-color: #7038F8;
 }
 
 .psychic {
-    background-color: #eaeda1;
+    background-color: #F85888;
 }
 
 .flying {
-    background-color: #F5F5F5;
+    background-color: #A890F0;
 }
 
 .fighting {
-    background-color: #E6E0D4;
+    background-color: #C03028;
 }
 
 .normal {
-    background-color: #F5F5F5;
+    background-color: #A8A878;
 }
 
 /* responsive */
@@ -203,7 +206,7 @@ body {
     }
 
     .pokedex img {
-        width: 30%;
+        width: 35%;
     }
 
     .search_box {
@@ -212,47 +215,5 @@ body {
 
     .search_box input[type="text"] {
         font-size: 13px;
-    }
-}
-
-/* loading */
-.loader {
-    opacity: 0;
-    display: flex;
-    position: fixed;
-    bottom: 50px;
-    transition: opacity 0.3s ease-in;
-}
-
-.loader.show {
-    opacity: 1;
-}
-
-.circle {
-    background-color: #4CD964;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin: 5px;
-    animation: bounce 0.5s ease-in infinite;
-}
-
-.circle:nth-of-type(2) {
-    animation-delay: 0.1s;
-}
-
-.circle:nth-of-type(3) {
-    animation-delay: 0.2s;
-}
-
-@keyframes bounce {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-10px);
     }
 }
