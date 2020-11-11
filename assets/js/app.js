@@ -2,81 +2,86 @@ const pokemonsList = document.querySelector('#pokemonsList');
 const loaderContainer = document.querySelector('.loader');
 const searchBarInput = document.querySelector('#searchBar');
 
-const getPokemons = async () => {
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/?_limit=20`)
-    return response.json()
+var getNextPokemons = null;
+
+const generatePokemonPromises = async () => {
+    let pokemonUrl = 'https://pokeapi.co/api/v2/pokemon';
+
+    if (getNextPokemons != null) {
+        pokemonUrl = getNextPokemons;
+    }
+
+    const response = await fetch(pokemonUrl, {
+        method: 'GET'
+    });
+    const responseJSON = await response.json();
+    const pokemons = responseJSON.results;
+
+    let pokeInfo = [];
+    for (const pokemon of pokemons) {
+        const pokemonResponse = await fetch(pokemon.url, {
+            method: 'GET'
+        });
+        const pokemonJSON = await pokemonResponse.json();
+        pokeInfo.push(pokemonJSON);
+    }
+
+    getNextPokemons = responseJSON.next;
+
+    return pokeInfo;
 }
 
-const generatePokemonsTemplate = pokemons => pokemons.map(({
-    id,
-    name
-}) => `
-    <li class="card">
-        <h2 class="number">${id}</h2>
-        <h2 class="card-title">${name}</h2>
-    </li>
-`).join('')
+const generateHTML = pokemons =>
+    pokemons.reduce((accumulator, {
+        name,
+        id,
+        types
+    }) => {
+        const elementTypes = types.map(typeInfo => typeInfo.type.name)
+
+        accumulator += `
+        <li class="card ${elementTypes[0]}" onclick="selectPokemon(${id})">
+            <img class="card-image" alt="${name}" src="https://pokeres.bastionbot.org/images/pokemon/${id}.png">
+            <h2 class="card-title">#${id.toString().padStart(3, '0')} ${name}</h2>
+            <p class="card-subtitle">${elementTypes.join(' | ')}</p>
+        </li>
+      `
+        return accumulator
+    }, '')
+
+const insertPokemonsIntoPage = pokemons => {
+    const ul = document.querySelector('[data-js="pokedex"]')
+    ul.innerHTML = pokemons
+}
 
 const addPokemonsIntoDOM = async () => {
-    const pokemons = await getPokemons()
-    const pokemonsTemplate = generatePokemonsTemplate(pokemons)
+    const pokemons = await generatePokemonPromises()
+    const pokemonsTemplate = generateHTML(pokemons)
 
     pokemonsList.innerHTML += pokemonsTemplate
 }
 
-const getNextPokemons = () => {
-    setTimeout(() => {
-        addPokemonsIntoDOM()
-    }, 300)
-}
-
-const removeLoader = () => {
-    setTimeout(() => {
-        loaderContainer.classList.remove('show');
-        getNextPokemons()
-    }, 1000)
-}
-
-const showLoader = () => {
-    loaderContainer.classList.add('show');
-    removeLoader()
-}
-
-const handleScrollToPageBottom = () => {
+const handleScrollToPageBottom = async () => {
     const {
         clientHeight,
         scrollHeight,
         scrollTop
     } = document.documentElement
-    const isPageBottomAlmostReached = scrollTop + clientHeight >= scrollHeight - 10
+    const isPageBottomAlmostReached = scrollTop + clientHeight >= scrollHeight - 1
 
     if (isPageBottomAlmostReached) {
-        showLoader()
+        loaderContainer.classList.add('show')
+        await addPokemonsIntoDOM()
+        loaderContainer.classList.remove('show');
     }
 }
 
-const showPokemonIfMatchInputValue = inputValue => card => {
-    const pokemonNumber = card.querySelector('.number').textContent.toLowerCase()
-    const pokemonName = card.querySelector('.card-title').textContent.toLowerCase()
-    const pokemonContainsInputValue = pokemonNumber.includes(inputValue) || pokemonName.includes(inputValue)
-
-    if (pokemonContainsInputValue) {
-        card.style.display = 'flex'
-        return
-    }
-
-    card.style.display = 'none'
+const addPokemonsIntoPage = async () => {
+    const pokemonsInfo = await generatePokemonPromises()
+    const pokemonsHtml = generateHTML(pokemonsInfo)
+    insertPokemonsIntoPage(pokemonsHtml)
 }
 
-const handleInputValue = event => {
-    const inputValue = event.target.value.toLowerCase();
-    const pokemons = document.querySelectorAll('.card');
-
-    pokemons.forEach(showPokemonIfMatchInputValue(inputValue))
-}
-//console.log(showPokemonIfMatchInputValue)
-
-addPokemonsIntoDOM()
+addPokemonsIntoPage();
 
 window.addEventListener('scroll', handleScrollToPageBottom)
-searchBarInput.addEventListener('input', handleInputValue)
