@@ -28,7 +28,6 @@ const displayPopup = (pokemons) => {
         </div>       
     `;
     pokemonsList.innerHTML = generateHTML + pokemonsList.innerHTML;
-    console.log(pokemonsList)
 };
 
 const closePopup = () => {

@@ -3,6 +3,7 @@
     display: flex;
     position: fixed;
     bottom: 50px;
+    left: 50%;
     transition: opacity 0.3s ease-in;
 }
 
