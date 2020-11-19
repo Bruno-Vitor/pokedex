@@ -1,2 +1,2 @@
 # pokedex
-Projeto sendo desenvolvido no Pecege Starter Pack.
+Projeto em desenvolvimento.
