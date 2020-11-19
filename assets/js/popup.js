@@ -1,3 +1,6 @@
+
+// ainda não está funcional, falta corrigir alguns erros!
+
 const pokeCache = {};
 
 const selectPokemon = async (id) => {
@@ -11,7 +14,7 @@ const selectPokemon = async (id) => {
     displayPopup(pokeCache[id]);
 };
 
-const displayPopup = (pokemons) => {
+const displayPopup = (pokemons, id, height, weight, type) => {
     const elementTypes = pokemons.types.map((type) =>
         type.type.name).join(' | ');
     const name = pokemons.sprites['front_default'];
@@ -34,5 +37,3 @@ const closePopup = () => {
     const popup = document.querySelector('.popup');
     popup.parentElement.removeChild(popup);
 };
-
-getPokemonUrl();
