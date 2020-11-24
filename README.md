@@ -1,2 +1,1 @@
 # pokedex
-Projeto em desenvolvimento.
